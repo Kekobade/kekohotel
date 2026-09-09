@@ -32,6 +32,7 @@
     font-size:15px;
     line-height:1.6;
     position:relative;
+    isolation:isolate;
     overflow-x:hidden;
   }
   a{color:var(--link);text-decoration:none;border-bottom:1px dotted var(--link);}
@@ -40,7 +41,7 @@
   /* ---------- starfield ---------- */
   #stars, #stars2, #stars3{
     position:fixed; top:0; left:0; width:100%; height:100%;
-    pointer-events:none; z-index:0;
+    pointer-events:none; z-index:-1;
   }
   .star{
     position:absolute;
@@ -55,25 +56,19 @@
 
   .moon{
     position:fixed;
-    top:60px; right:80px;
-    width:90px; height:90px;
+    top:-60px; right:-60px;
+    width:220px; height:220px;
     border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, var(--moon), var(--moon-glow) 70%);
-    box-shadow:0 0 40px 10px rgba(243,230,168,.35), 0 0 90px 30px rgba(243,230,168,.12);
-    z-index:0;
-    animation:float 6s ease-in-out infinite;
+    background:radial-gradient(circle at 40% 40%, var(--moon) 0%, var(--moon-glow) 45%, rgba(243,230,168,0) 72%);
+    filter:blur(2px);
+    opacity:.55;
+    z-index:-1;
+    pointer-events:none;
+    animation:float 8s ease-in-out infinite;
   }
-  .moon::before, .moon::after{
-    content:'';
-    position:absolute;
-    border-radius:50%;
-    background:rgba(180,165,120,.35);
-  }
-  .moon::before{width:14px;height:14px;top:20px;left:18px;}
-  .moon::after{width:9px;height:9px;top:50px;left:55px;}
   @keyframes float{
     0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-14px);}
+    50%{transform:translateY(-10px);}
   }
 
   /* ---------- layout ---------- */
@@ -313,7 +308,7 @@
 
   @media (max-width:720px){
     .page{grid-template-columns:1fr;}
-    .moon{width:60px;height:60px;top:20px;right:20px;}
+    .moon{width:140px;height:140px;top:-30px;right:-30px;opacity:.4;}
   }
 </style>
 </head>
@@ -412,23 +407,24 @@
         <li><a href="#">Twitter / X</a></li>
         <li><a href="#">E-mail</a></li>
         -->
- 
-        
-    <div class="panel online-widget">
-  I'm
-         
-  <!-- <span class="status status-on">● ONLINE</span> -->
-<span class="status status-off">● OFFLINE</span>
-
+      </ul>
     </div>
-    </aside>
-<section class="panel"> 
+
+    <div class="panel online-widget">
+      I'm
+      <!-- <span class="status status-on">● ONLINE</span> -->
+      <span class="status status-off">● OFFLINE</span>
+    </div>
+  </aside>
+
+  <section class="panel">
       <h2>My Pet</h2>
       <!-- BEGIN bunnyhero labs pet code -->
 <table border="0" cellpadding="0" cellspacing="0" width="250"><tr><td><iframe src="https://bunnyherolabs.com/adopt/i/bWM9cGlnLnN3ZiZjbHI9MHhmZmZmZmYmY249a2VrbyZhbj1rZWtvYmFkZQ%3D%3D.swf" width="300" height="350" frameborder="0"></iframe></td></tr>
 <tr><td align="center"><small><a href="http://bunnyherolabs.com/adopt/">adopt your own virtual pet!</a></small></td></tr></table>
 <!-- END bunnyhero labs pet code -->
     </section>
+
 </div>
 <!--
   <div class="badge-row">
@@ -445,7 +441,6 @@
     Made with HTML, CSS, and late nights. Best viewed with the lights off.
   </footer>
 -->
-</div>
 
 <script>
   // generate a starfield
